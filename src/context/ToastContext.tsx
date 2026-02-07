@@ -1,25 +1,15 @@
-import React, { useState, type ReactNode } from 'react';
-import type { Toast } from '../types/types';
-
+import React, { type ReactNode } from 'react';
+import { ToastList } from '../components/ToastList';
+import { useToastStore } from '../hooks/useToastStore';
+import { ToastContext } from './ToastContextValue';
 
 export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [toasts, setToasts] = useState<Toast[]>([]);
+    const { toasts, addToast, removeToast, resetToastTimer } = useToastStore();
 
-  const addToast = (toast: Omit<Toast, 'id'>) => {
-    
-  };
-
-  const removeToast = (id: string) => {
-    
-  };
-
-  return (
-   <>
-
-   </>
-  );
-};
-
-export const useToast = () => {
-  
+    return (
+        <ToastContext.Provider value={{ addToast, removeToast, resetToastTimer }}>
+            {children}
+            <ToastList toasts={toasts} onRemove={removeToast} />
+        </ToastContext.Provider>
+    );
 };

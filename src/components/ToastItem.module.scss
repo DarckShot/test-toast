@@ -1,0 +1,94 @@
+.toast {
+    pointer-events: auto;
+    min-width: 250px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transform-origin: right center;
+
+    button {
+        background: transparent;
+        margin-left: 10px;
+        padding: 0;
+        font-size: 1.2rem;
+        cursor: pointer;
+        color: white;
+        border: none;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    // Типы тостов
+    &-success {
+        background: #10b981;
+    }
+
+    &-error {
+        background: #ef4444;
+    }
+
+    &-warning {
+        background: #f59e0b;
+    }
+
+    &-info {
+        background: #3b82f6;
+    }
+
+    // Состояния анимации
+    &-entering {
+        animation: slideInRight 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    &-exiting {
+        animation: slideOutRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+        pointer-events: none;
+    }
+}
+
+// Анимация появления справа с bounce эффектом
+@keyframes slideInRight {
+    0% {
+        transform: translateX(120%) scale(0.7);
+        opacity: 0;
+    }
+    60% {
+        transform: translateX(-10px) scale(1.02);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+// Анимация исчезновения вправо с уменьшением
+@keyframes slideOutRight {
+    0% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+        max-height: 100px;
+        margin-bottom: 10px;
+    }
+    70% {
+        transform: translateX(120%) scale(0.7);
+        opacity: 0;
+        max-height: 100px;
+        margin-bottom: 10px;
+    }
+    100% {
+        transform: translateX(120%) scale(0.7);
+        opacity: 0;
+        max-height: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
